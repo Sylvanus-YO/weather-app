@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyPulse | Real-Time Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <main class="weather-app">
+        <!-- Top Bar: Brand, Search & Controls -->
+        <header class="top-bar">
+            <div class="brand">
+                <div class="brand-logo">☁️</div>
+                <div>
+                    <strong>SkyPulse</strong>
+                    <small>Live Weather Telemetry</small>
+                </div>
+            </div>
+
+            <form class="search-form" id="searchForm">
+                <input 
+                    type="text" 
+                    id="cityInput" 
+                    placeholder="Search any city (e.g., Kano, Lagos, London)..." 
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit" class="btn-primary">Search</button>
+                <button type="button" class="btn-icon" id="geoButton" title="Use my current location">📍</button>
+            </form>
+
+            <div class="unit-toggle" id="unitToggle">
+                <button type="button" data-unit="celsius" class="active">°C</button>
+                <button type="button" data-unit="fahrenheit">°F</button>
+            </div>
+        </header>
+
+        <!-- Status / Error Banner -->
+        <div id="statusBanner" class="status-banner hidden" aria-live="polite"></div>
+
+        <!-- Main Weather Content -->
+        <section id="weatherContent" class="weather-grid">
+            
+            <!-- Left Column: Current Weather Hero + Metrics -->
+            <div class="main-column">
+                <div class="hero-card" id="heroCard">
+                    <div class="hero-top">
+                        <div>
+                            <p class="eyebrow" id="dayNightBadge">LIVE CONDITIONS</p>
+                            <h1 id="locationName">Loading...</h1>
+                            <p class="subtitle" id="currentDate">--</p>
+                        </div>
+                        <div class="weather-icon-large" id="currentIcon">⛅</div>
+                    </div>
+
+                    <div class="hero-temp-row">
+                        <span class="giant-temp" id="currentTemp">--°</span>
+                        <div class="condition-summary">
+                            <strong id="conditionText">--</strong>
+                            <span id="feelsLike">Feels like --°</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Telemetry Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-label">💧 Humidity</span>
+                        <strong class="metric-value" id="humidityVal">--%</strong>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">💨 Wind Speed</span>
+                        <strong class="metric-value" id="windVal">-- km/h</strong>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">🧭 Pressure</span>
+                        <strong class="metric-value" id="pressureVal">-- hPa</strong>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">🌧️ Precipitation</span>
+                        <strong class="metric-value" id="precipVal">-- mm</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: 7-Day Forecast -->
+            <aside class="forecast-card">
+                <p class="eyebrow">7-DAY OUTLOOK</p>
+                <h2>Daily Forecast</h2>
+                <div class="forecast-list" id="forecastList">
+                    <!-- Populated dynamically via JS from JSON -->
+                </div>
+            </aside>
+
+        </section>
+
+        <!-- Developer JSON Payload Inspector -->
+        <section class="json-inspector">
+            <div class="inspector-header">
+                <div>
+                    <strong>📦 Live API JSON Payload</strong>
+                    <small id="apiEndpointDisplay">Endpoint: Waiting for request...</small>
+                </div>
+                <button type="button" class="btn-secondary" id="toggleJsonBtn">Show Raw JSON</button>
+            </div>
+            <pre id="jsonOutput" class="json-code hidden">No payload loaded yet.</pre>
+        </section>
+    </main>
+
+</body>
+</html>
